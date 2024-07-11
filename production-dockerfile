@@ -1,0 +1,11 @@
+FROM python:3.10.11-slim-buster
+
+WORKDIR /evalquiz-client-flask
+COPY requirements.txt requirements.txt
+
+RUN pip3 install -r requirements.txt
+RUN pip3 install gunicorn
+
+COPY .  .
+
+CMD gunicorn -b 0.0.0.0:5000 -w 2 --threads 2 iot_backend.app:app

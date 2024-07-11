@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./production-dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - 5000:5000
+  mongodb:
+    image: mongo
+  mongoexpress:
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017
