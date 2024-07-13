@@ -20,10 +20,14 @@ if __name__ == "__main__":
 @app.route("/get_temperature_data")
 async def get_temperature_data() -> ResponseReturnValue:
     curser = database.temperature_data.find()
-    return jsonify(dumps(curser))
+    response = jsonify(dumps(curser))
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 @app.route("/get_humidity_data")
 async def get_humidity_data() -> ResponseReturnValue:
     curser = database.humidity_data.find()
-    return jsonify(dumps(curser))
+    response = jsonify(dumps(curser))
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
     
