@@ -31,3 +31,50 @@ async def get_humidity_data() -> ResponseReturnValue:
     response.headers.add("Access-Control-Allow-Origin", "*")
     return response
     
+@app.route("/get_wall_plug_data")
+async def get_wall_plug_data() -> ResponseReturnValue:
+    curser = database.wall_plug_data.find()
+    response = jsonify(dumps(curser))
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
+    
+@app.route("/get_solar_panel_data")
+async def get_solar_panel_data() -> ResponseReturnValue:
+    curser = database.solar_panel_data.find()
+    response = jsonify(dumps(curser))
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
+
+@app.route("/get_average_temperature_data")
+async def get_average_temperature_data() -> ResponseReturnValue:
+    # get the last 10 entries
+    curser = database.temperature_data.find().sort("_id", -1).limit(10)
+
+    # calculate the average
+    sum = 0
+    count = 0
+    for entry in curser:
+        sum += entry['temperature']
+        count += 1
+    average = sum / count
+
+    response = jsonify(average)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
+
+@app.route("/get_average_humidity_data")
+async def get_average_humidity_data() -> ResponseReturnValue:
+    # get the last 10 entries
+    curser = database.humidity_data.find().sort("_id", -1).limit(10)
+
+    # calculate the average
+    sum = 0
+    count = 0
+    for entry in curser:
+        sum += entry['humidity']
+        count += 1
+    average = sum / count
+
+    response = jsonify(average)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response

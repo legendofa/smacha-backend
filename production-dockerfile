@@ -8,4 +8,4 @@ RUN pip3 install gunicorn
 
 COPY .  .
 
-CMD gunicorn -b 0.0.0.0:5000 -w 2 --threads 2 iot_backend.app:app
+CMD gunicorn -b 0.0.0.0:5000 -w 1 --threads 1 iot_backend.app:app

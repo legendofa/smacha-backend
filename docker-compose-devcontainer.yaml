@@ -1,5 +1,7 @@
 services:
   app:
+    environment:
+      - PYTHONUNBUFFERED=1
     build:
       context: .
       dockerfile: ./devcontainer-dockerfile
