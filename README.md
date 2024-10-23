@@ -1,4 +1,4 @@
-# IoT Backend
+# SMACHA Backend
 
 ## Usage
 
